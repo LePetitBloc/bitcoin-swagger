@@ -2,9 +2,6 @@ version: '2'
 services:
   bitcoind:
     image: kylemanna/bitcoind
-    ports:
-      - "18332:18332"
-      - "18333:18333"
     command: [
       "btc_oneshot",
       "-printtoconsole",
@@ -13,17 +10,7 @@ services:
       "-rpcuser=test",
       "-rpcpassword=test",
       "-rest",
-
     ]
-#  nginx:
-#    restart: always
-#    build:
-#      context: .
-#      dockerfile: ./etc/docker/frontend/Dockerfile
-#    ports:
-#      - "80:80"
-#    links:
-#      - backend
   editor:
     build:
       context: .
