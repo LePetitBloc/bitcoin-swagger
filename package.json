@@ -1,0 +1,26 @@
+{
+  "name": "bitcoin-swagger",
+  "version": "0.16.0",
+  "description": "Bitcoind Rest API Swagger specification document (OpenAPI)",
+  "main": "swagger.json",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LePetitBloc/bitcoin-openapi.git"
+  },
+  "keywords": [
+    "bitcoin",
+    "bitcoind",
+    "openapi",
+    "swagger",
+    "rest"
+  ],
+  "author": "Johan Dufour <johan@lepetitbloc.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LePetitBloc/bitcoin-openapi/issues"
+  },
+  "homepage": "https://github.com/LePetitBloc/bitcoin-openapi#readme"
+}
