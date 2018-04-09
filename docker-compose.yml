@@ -1,0 +1,34 @@
+version: '2'
+services:
+  bitcoind:
+    image: kylemanna/bitcoind
+    ports:
+      - "18332:18332"
+      - "18333:18333"
+    command: [
+      "btc_oneshot",
+      "-printtoconsole",
+      "-testnet",
+      "-rpcallowip=::/0",
+      "-rpcuser=test",
+      "-rpcpassword=test",
+      "-rest",
+
+    ]
+#  nginx:
+#    restart: always
+#    build:
+#      context: .
+#      dockerfile: ./etc/docker/frontend/Dockerfile
+#    ports:
+#      - "80:80"
+#    links:
+#      - backend
+  editor:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    ports:
+      - "3000:80"
+    links:
+      - bitcoind
