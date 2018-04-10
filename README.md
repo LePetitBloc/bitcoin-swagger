@@ -1,4 +1,4 @@
-# bitcoin-swagger
+# Bitcoin OpenAPI specification (swagger)
 **Bitcoin** Rest API swagger specification document in Yml and Json (OpenAPI).
 
 > The current version uses the Version 2.0 of the OpenAPI Specification:
@@ -8,6 +8,7 @@
 You can import the YML/Json file in the [Swagger editor](http://editor.swagger.io/) and generate a client for any [supported languages](https://swagger.io/open-source-integrations/).
 
 ## Resources
+* Docs https://lepetitbloc.github.io/bitcoin-swagger/
 * Version 2.0 of the OpenAPI Specification https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md
 * https://github.com/bitcoin/bitcoin/blob/master/doc/REST-interface.md
 
