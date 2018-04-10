@@ -1,0 +1,10 @@
+{
+  "name": "bitcoin-swagger-ui",
+  "description": "Bitcoind Rest API Swagger UI",
+  "scripts": {},
+  "private": true,
+  "author": "Johan Dufour <johan@lepetitbloc.net>",
+  "devDependencies": {
+    "swagger-ui-dist": "^3.13.3"
+  }
+}
