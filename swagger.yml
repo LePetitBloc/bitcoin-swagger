@@ -28,19 +28,19 @@ tags:
 schemes:
 - "http"
 paths:
-  /tx/{tx-hash}:
+  /tx/{txHash}:
     get:
       tags:
       - "transaction"
       summary: "Get transaction by hash."
       description: "Given a transaction hash: returns a transaction in binary, hex-encoded binary, or JSON formats. For full TX query capability, one must enable the transaction index via txindex=1 command line / configuration option."
-      operationId: "getTransaction"
+      operationId: "rest_tx"
       produces:
       - "application/octet-stream"
       - "text/plain"
       - "application/json"
       parameters:
-      - name: "tx-hash"
+      - name: "txHash"
         in: "path"
         description: "The transaction hash."
         required: true
@@ -54,23 +54,59 @@ paths:
           description: "Invalid hash"
         404:
           description: "Transaction not found"
-  /block/{block-hash}:
+  /block/{blockHash}:
     get:
       tags:
       - "block"
       summary: "Get block by hash."
       description: "Given a block hash: returns a block, in binary, hex-encoded binary or JSON formats. The HTTP request and response are both handled entirely in-memory, thus making maximum memory usage at least 2.66MB (1 MB max block, plus hex encoding) per request. With the /notxdetails/ option JSON response will only contain the transaction hash instead of the complete transaction details. The option only affects the JSON response."
-      operationId: "getBlock"
+      operationId: "rest_block_extended"
       produces:
       - "application/octet-stream"
       - "text/plain"
       - "application/json"
       parameters:
-      - name: "block-hash"
+      - name: "blockHash"
         in: "path"
         description: "the block hash"
         required: true
         type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Block"
+        400:
+          description: "Invalid hash"
+        404:
+          description: "Block not found"
+  /block/notxdetails/{blockHash}.{format}:
+    get:
+      tags:
+      - "block"
+      summary: "Get block by hash."
+      description: "Given a block hash: returns a block, in binary, hex-encoded binary or JSON formats. The HTTP request and response are both handled entirely in-memory, thus making maximum memory usage at least 2.66MB (1 MB max block, plus hex encoding) per request. With the /notxdetails/ option JSON response will only contain the transaction hash instead of the complete transaction details. The option only affects the JSON response."
+      operationId: "rest_block_notxdetails"
+      produces:
+      - "application/octet-stream"
+      - "text/plain"
+      - "application/json"
+      parameters:
+      - name: "blockHash"
+        description: "The block hash"
+        required: true
+        type: "string"
+        in: "path"
+      - name: "format"
+        description: "The expected format"
+        type: "string"
+        default: "json"
+        required: true
+        enum:
+        - "json"
+        - "bin"
+        - "hex"
+        in: "path"
       responses:
         200:
           description: "successful operation"
@@ -86,7 +122,7 @@ paths:
       - "chain"
       summary: "Returns various state info regarding block chain processing."
       description: "Returns various state info regarding block chain processing. Only supports JSON as output format."
-      operationId: "getinfo"
+      operationId: "rest_chaininfo"
       produces:
       - "application/json"
       responses:
@@ -100,7 +136,7 @@ paths:
       - "memory-pool"
       summary: "Returns various information about the TX mempool."
       description: "Only supports JSON as output format."
-      operationId: "mempoolinfo"
+      operationId: "rest_mempool_info"
       produces:
       - "application/json"
       responses:
@@ -114,7 +150,7 @@ paths:
       - "memory-pool"
       summary: "Returns transactions in the TX mempool."
       description: "Only supports JSON as output format."
-      operationId: "mempoolcontent"
+      operationId: "rest_mempool_contents"
       produces:
       - "application/json"
       responses:
@@ -125,6 +161,89 @@ paths:
             properties:
               txid:
                 $ref: "#/definitions/Transaction"
+  /headers/{headerCount}/{blockHash}.{format}:
+    get:
+      tags:
+      - "memory-pool"
+      summary: "Returns headers."
+      description: "Only supports BIN and HEX as output format."
+      operationId: "rest_headers"
+      produces:
+      - "application/octet-stream"
+      - "text/plain"
+      parameters:
+      - name: "headerCount"
+        description: "The header count"
+        type: "integer"
+        minimum: 1
+        maximum: 1999
+        required: true
+        in: "path"
+      - name: "blockHash"
+        description: "The block hash"
+        type: "string"
+        required: true
+        in: "path"
+      - name: "format"
+        description: "The expected format"
+        type: "string"
+        default: "hex"
+        required: true
+        enum:
+        - "bin"
+        - "hex"
+        in: "path"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "string"
+  /getutxos/checkmempool/{txHash}-{txOutput}.{format}:
+    get:
+      tags:
+      - "memory-pool"
+      summary: "Returns Unspent Transaction (TX) Outputs"
+      description: "Only supports JSON as output format."
+      operationId: "rest_getutxos"
+      produces:
+      - "application/octet-stream"
+      - "text/plain"
+      parameters:
+      - name: "txHash"
+        description: "The transaction hash"
+        type: "string"
+        required: true
+        in: "path"
+      - name: "txOutput"
+        description: "The transaction output"
+        type: "string"
+        required: true
+        in: "path"
+      - name: "format"
+        description: "The expected format"
+        type: "string"
+        enum:
+        - "json"
+        - "bin"
+        - "hex"
+        default: "json"
+        required: true
+        in: "path"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            properties:
+              chainHeight:
+                type: "integer"
+              chaintipHash:
+                type: "string"
+              bitmap:
+                type: "string"
+              utxos:
+                type: "array"
+                items:
+                  $ref: "#/definitions/UTxO"
 definitions:
   ChainInfo:
     type: "object"
@@ -376,6 +495,48 @@ definitions:
         format: "int64"
     xml:
       name: "bip9"
+  UTxO:
+    type: "object"
+    properties:
+      txvers:
+        type: "integer"
+      height:
+        type: "integer"
+      value:
+        type: "number"
+        format: "float"
+      scriptPubKey:
+        $ref: "#/definitions/ScriptPubKey"
+    xml:
+      name: "utxo"
+  ScriptPubKey:
+    type: "object"
+    properties:
+      asm:
+        type: "string"
+      hex:
+        type: "string"
+      reqSigs:
+        type: "integer"
+      type:
+        type: "string"
+        enum:
+        - "nonstandard"
+        - "pubkey"
+        - "pubkeyhash"
+        - "scripthash"
+        - "multisig"
+        - "nulldata"
+        - "witness_v0_keyhash"
+        - "witness_v0_scripthash"
+        - "witness_unknown"
+        default: "pubkeyhash"
+      addresses:
+        type: "array"
+        items:
+          type: "string"
+    xml:
+      name: "scriptpubkey"
 externalDocs:
   description: "Find out more about the Bitcoin REST API"
   url: "https://github.com/bitcoin/bitcoin/blob/master/doc/REST-interface.md"
