@@ -4,7 +4,8 @@
   "description": "Bitcoind Rest API Swagger specification document (OpenAPI)",
   "main": "swagger.json",
   "scripts": {
-    "start": "docker-compose up"
+    "start": "docker-compose up",
+    "build-ui": "cd ui && npm install"
   },
   "repository": {
     "type": "git",
