@@ -7,12 +7,12 @@ require('rxjs/add/observable/from');
 require('rxjs/add/operator/concat');
 const codgens = require('./swagger-codegen');
 
-const { UID = 1000, GH_TOKEN } = process.env;
+const { UID = 1000, GITHUB_TOKEN } = process.env;
 
 const createRepositoryURL = (user, repo) => `git@github.com:${user}/${repo}.git`;
 
 const gh = new GitHub({
-    token: GH_TOKEN
+    token: GITHUB_TOKEN
 });
 const org = 'bitcoind-rest';
 const bitcoindRest = gh.getOrganization(org);
