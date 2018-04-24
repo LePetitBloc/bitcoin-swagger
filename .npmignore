@@ -1,3 +1,4 @@
 docker-compose.yml
 LICENCE
 docker/
+generate.js

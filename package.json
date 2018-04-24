@@ -5,7 +5,7 @@
   "main": "swagger.json",
   "scripts": {
     "start": "docker-compose up",
-    "build-ui": "cd ui && npm install"
+    "build-ui": "cd ui && npm install",
   },
   "repository": {
     "type": "git",
@@ -23,5 +23,11 @@
   "bugs": {
     "url": "https://github.com/LePetitBloc/bitcoin-swagger/issues"
   },
-  "homepage": "https://github.com/LePetitBloc/bitcoin-swagger#readme"
+  "homepage": "https://github.com/LePetitBloc/bitcoin-swagger#readme",
+  "devDependencies": {
+    "chalk": "^2.4.0",
+    "github-api": "^3.0.0",
+    "observable-child-process": "0.0.1",
+    "rxjs": "^5.5.10"
+  }
 }

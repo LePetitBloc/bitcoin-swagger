@@ -12,3 +12,5 @@ deploy:
   keep-history: true
   on:
     branch: master
+
+after_deploy: node codegen.js

@@ -1,0 +1,49 @@
+{
+  "javascript": {
+    "repository": {
+      "name": "javascript-client",
+      "description": "Generated bitcoind Javascript Rest client"
+    },
+    "config": {
+      "projectName": "bitcoind-rest-client",
+      "projectDescription": "Generated bitcoind Rest client",
+      "usePromises": true,
+      "licenseName": "MIT"
+    }
+  },
+  "go": {
+    "repository": {
+      "name": "go-client",
+      "description": "Generated bitcoind Go Rest client"
+    },
+    "config": {}
+  },
+  "android": {
+    "repository": {
+      "name": "android-client",
+      "description": "Generated bitcoind Android Rest client"
+    },
+    "config": {}
+  },
+  "rust": {
+    "repository": {
+      "name": "rust-client",
+      "description": "Generated bitcoind Rust Rest client"
+    },
+    "config": {}
+  },
+  "python": {
+    "repository": {
+      "name": "python-client",
+      "description": "Generated bitcoind Python Rest client"
+    },
+    "config": {}
+  },
+  "elm": {
+    "repository": {
+      "name": "elm-client",
+      "description": "Generated bitcoind Elm Rest client"
+    },
+    "config": {}
+  }
+}
