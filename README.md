@@ -7,6 +7,10 @@
 ## Usage
 You can import the YML/Json file in the [Swagger editor](http://editor.swagger.io/) and generate a client for any [supported languages](https://swagger.io/open-source-integrations/).
 
+## Clients
+A collection of pre-generated client repositories is available in the **bitcoind-rest** group:
+https://github.com/bitcoind-rest
+
 ## Resources
 * Docs https://lepetitbloc.github.io/bitcoin-swagger/
 * Version 2.0 of the OpenAPI Specification https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md
