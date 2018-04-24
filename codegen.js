@@ -30,7 +30,7 @@ const createRepository = (name, description = '') =>
 ;
 
 const pushTo = cwd => repository => {
-    return spawn('rm', ['-rf', '.git'])
+    return spawn('rm', ['-rf', '.git'], { cwd })
         .concat(spawn('git', ['init'], { cwd }))
         .concat(spawn('git', ['config', 'user.name', 'LePetitBot'], { cwd }))
         .concat(spawn('git', ['config', 'user.email', 'bonjour@lepetitbloc.net'], { cwd }))
