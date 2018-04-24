@@ -7,7 +7,7 @@ require('rxjs/add/observable/from');
 require('rxjs/add/operator/concat');
 const codgens = require('./swagger-codegen');
 
-const { UID, GH_TOKEN } = process.env;
+const { UID = 0, GH_TOKEN } = process.env;
 
 const createRepositoryURL = (user, repo) => `git@github.com:${user}/${repo}.git`;
 
