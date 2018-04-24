@@ -5,7 +5,7 @@
   "main": "swagger.json",
   "scripts": {
     "start": "docker-compose up",
-    "build-ui": "cd ui && npm install",
+    "build-ui": "cd ui && npm install"
   },
   "repository": {
     "type": "git",
